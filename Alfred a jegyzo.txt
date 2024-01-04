@@ -8,11 +8,11 @@ Felhasznaloi dokumentacio, fejlesztoi bele
 
 Hetfo	           Kedd	       Szerda	   Csutortok 	   Pentek
 0:			       Angol       IKT project    
-1: Matek         Programozás   Történelem  IKT project     Matek
-2: Matek         Programozás   Irodalom    Szakmai ang     Nyelvtan
-3: Irodalom      Programozás   Irodalom    Szakmai ang     Fizika
-4: Töri 	 Adatbázis     Matek       IKT project     Töri
-5: Osztályfőnöki Adatbázis     Tesi        IKT project     Angol
-6: Fizika	 Webprogram				   Tesi
+1: Matek         Programozás   Történelem  IKT project     
+2: Matek         Programozás   Irodalom    Szakmai ang     Matek
+3: Irodalom      Programozás   Irodalom    Szakmai ang     Nyelvtan
+4: Töri 	 Adatbázis     Matek       IKT project     Fizika
+5: Osztályfőnöki Adatbázis     Tesi        IKT project     Töri
+6: Fizika	 Webprogram				   Angol
 7: Angol	 Webprogram				   Tesi
-8: 	         Webprogram
+8: 	         Webprogram				   Tesi
