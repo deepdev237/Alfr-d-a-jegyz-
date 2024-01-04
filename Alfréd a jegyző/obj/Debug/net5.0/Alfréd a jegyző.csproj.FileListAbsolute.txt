@@ -1,0 +1,16 @@
+C:\Users\glonczit\source\repos\Alfréd a jegyző\Alfréd a jegyző\bin\Debug\net5.0\Alfréd a jegyző.exe
+C:\Users\glonczit\source\repos\Alfréd a jegyző\Alfréd a jegyző\bin\Debug\net5.0\Alfréd a jegyző.deps.json
+C:\Users\glonczit\source\repos\Alfréd a jegyző\Alfréd a jegyző\bin\Debug\net5.0\Alfréd a jegyző.runtimeconfig.json
+C:\Users\glonczit\source\repos\Alfréd a jegyző\Alfréd a jegyző\bin\Debug\net5.0\Alfréd a jegyző.runtimeconfig.dev.json
+C:\Users\glonczit\source\repos\Alfréd a jegyző\Alfréd a jegyző\bin\Debug\net5.0\Alfréd a jegyző.dll
+C:\Users\glonczit\source\repos\Alfréd a jegyző\Alfréd a jegyző\bin\Debug\net5.0\ref\Alfréd a jegyző.dll
+C:\Users\glonczit\source\repos\Alfréd a jegyző\Alfréd a jegyző\bin\Debug\net5.0\Alfréd a jegyző.pdb
+C:\Users\glonczit\source\repos\Alfréd a jegyző\Alfréd a jegyző\obj\Debug\net5.0\Alfréd a jegyző.csproj.AssemblyReference.cache
+C:\Users\glonczit\source\repos\Alfréd a jegyző\Alfréd a jegyző\obj\Debug\net5.0\Alfréd a jegyző.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\glonczit\source\repos\Alfréd a jegyző\Alfréd a jegyző\obj\Debug\net5.0\Alfréd a jegyző.AssemblyInfoInputs.cache
+C:\Users\glonczit\source\repos\Alfréd a jegyző\Alfréd a jegyző\obj\Debug\net5.0\Alfréd a jegyző.AssemblyInfo.cs
+C:\Users\glonczit\source\repos\Alfréd a jegyző\Alfréd a jegyző\obj\Debug\net5.0\Alfréd a jegyző.csproj.CoreCompileInputs.cache
+C:\Users\glonczit\source\repos\Alfréd a jegyző\Alfréd a jegyző\obj\Debug\net5.0\Alfréd a jegyző.dll
+C:\Users\glonczit\source\repos\Alfréd a jegyző\Alfréd a jegyző\obj\Debug\net5.0\ref\Alfréd a jegyző.dll
+C:\Users\glonczit\source\repos\Alfréd a jegyző\Alfréd a jegyző\obj\Debug\net5.0\Alfréd a jegyző.pdb
+C:\Users\glonczit\source\repos\Alfréd a jegyző\Alfréd a jegyző\obj\Debug\net5.0\Alfréd a jegyző.genruntimeconfig.cache
