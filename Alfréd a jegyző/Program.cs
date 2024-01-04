@@ -9,10 +9,10 @@ namespace Alfréd_a_jegyző
         {
             var timetable = new Dictionary<string, List<string>>
             {
-                { "Hetfo", new List<string> { "", "", "Matek", "Matek", "Irodalom", "Töri", "Osztályfőnöki", "Fizika", "Angol", "" } },
-                { "Kedd", new List<string> { "Angol", "Programozás", "Programozás", "Programozás", "Adatbázis", "Adatbázis", "Webprogram", "Webprogram", "Webprogram" } },
-                { "Szerda", new List<string> { "", "Történelem", "Irodalom", "Irodalom", "Matek", "Tesi", "", "", "" } },
-                { "Csutortok", new List<string> { "", "", "Szakmai ang", "Szakmai ang", "IKT project", "IKT project", "", "", "Tesi" } },
+                { "Hetfo", new List<string> { "", "Matek", "Matek", "Irodalom", "Töri", "Osztályfőnöki", "Fizika", "Angol", "" } },
+                { "Kedd", new List<string> { "", "Programozás", "Programozás", "Programozás", "Adatbázis", "Adatbázis", "Webprogram", "Webprogram", "Webprogram" } },
+                { "Szerda", new List<string> { "Angol", "Történelem", "Irodalom", "Irodalom", "Matek", "Tesi", "", "", "" } },
+                { "Csutortok", new List<string> { "IKT project", "IKT project", "Szakmai ang", "Szakmai ang", "IKT project", "IKT project", "", "", "" } },
                 { "Pentek", new List<string> { "", "", "Matek", "Nyelvtan", "Fizika", "Töri", "Angol", "Tesi", "Tesi" } }
             };
 
