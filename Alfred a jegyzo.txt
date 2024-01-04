@@ -1,0 +1,18 @@
+1. Jegyek
+2. Órarend
+3. >~<
+
+Felhasznaloi dokumentacio, fejlesztoi bele
+
+Órarend:
+
+Hetfo	           Kedd	       Szerda	   Csutortok 	   Pentek
+0:			       Angol       IKT project    
+1: Matek         Programozás   Történelem  IKT project     Matek
+2: Matek         Programozás   Irodalom    Szakmai ang     Nyelvtan
+3: Irodalom      Programozás   Irodalom    Szakmai ang     Fizika
+4: Töri 	 Adatbázis     Matek       IKT project     Töri
+5: Osztályfőnöki Adatbázis     Tesi        IKT project     Angol
+6: Fizika	 Webprogram				   Tesi
+7: Angol	 Webprogram				   Tesi
+8: 	         Webprogram
