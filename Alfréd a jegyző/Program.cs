@@ -5,20 +5,18 @@ namespace Alfréd_a_jegyző
 {
     class Program
     {
-        public static class HungarianNameGenerator
+        static void Main(string[] args)
         {
-            private static List<string> firstNames = new List<string> { "Béla", "József", "István", "Zoltán", "Péter", "Gábor", "Attila", "László", "Mihály", "György" };
-            private static List<string> lastNames = new List<string> { "Kovács", "Szabó", "Horváth", "Tóth", "Varga", "Nagy", "Farkas", "Papp", "Lakatos", "Molnár" };
-
-            public static string Generate()
+            var menu = new Menu(new List<MenuOption>
             {
-                Random rand = new Random();
-                string firstName = firstNames[rand.Next(firstNames.Count)];
-                string lastName = lastNames[rand.Next(lastNames.Count)];
+                new MenuOption { Description = "Órarend", Function = menu => { Orarend(menu); } },
+                new MenuOption { Description = "Jegyek kezelése", Function = menu => { Jegyek(menu); } },
+                new MenuOption { Description = "Hiányzó diákok jelentése", Function = menu => { ReportMissingStudents(menu); } },
+            });
 
-                return $"{firstName} {lastName}";
-            }
+            menu.Display();
         }
+
         class MenuOption
         {
             public string Description { get; set; }
@@ -73,12 +71,6 @@ namespace Alfréd_a_jegyző
             }
         }
 
-        static void Quit()
-        {
-            Console.WriteLine("Alfréd búcsúzik.");
-            Environment.Exit(0);
-        }
-
         static void Orarend(Menu menu)
         {
             Console.Clear();
@@ -115,15 +107,16 @@ namespace Alfréd_a_jegyző
             Console.ReadKey();
             Console.Clear();
         }
-
-        static Dictionary<int, Tuple<string, List<int>>> students = new Dictionary<int, Tuple<string, List<int>>>
+        
+        static Dictionary<int, Tuple<string, List<int>, bool>> students = new Dictionary<int, Tuple<string, List<int>, bool>>
         {
-            { 1, new Tuple<string, List<int>>(HungarianNameGenerator.Generate(), new List<int> { 5, 4, 3, 2, 1 }) },
-            { 2, new Tuple<string, List<int>>(HungarianNameGenerator.Generate(), new List<int> { 1, 2, 3, 4, 5 }) },
-            { 3, new Tuple<string, List<int>>(HungarianNameGenerator.Generate(), new List<int> { 2, 3, 4, 5, 1 }) },
-            { 4, new Tuple<string, List<int>>(HungarianNameGenerator.Generate(), new List<int> { 3, 4, 5, 1, 2 }) },
-            { 5, new Tuple<string, List<int>>(HungarianNameGenerator.Generate(), new List<int> { 4, 5, 1, 2, 3 }) }
+            { 1, new Tuple<string, List<int>, bool>(HungarianNameGenerator.Generate(), new List<int> { 5, 4, 3, 2, 1 }, false) },
+            { 2, new Tuple<string, List<int>, bool>(HungarianNameGenerator.Generate(), new List<int> { 1, 2, 3, 4, 5 }, false) },
+            { 3, new Tuple<string, List<int>, bool>(HungarianNameGenerator.Generate(), new List<int> { 2, 3, 4, 5, 1 }, false) },
+            { 4, new Tuple<string, List<int>, bool>(HungarianNameGenerator.Generate(), new List<int> { 3, 4, 5, 1, 2 }, false) },
+            { 5, new Tuple<string, List<int>, bool>(HungarianNameGenerator.Generate(), new List<int> { 4, 5, 1, 2, 3 }, false) }
         };
+
 
         static void Jegyek(Menu menu)
         {
@@ -178,21 +171,73 @@ namespace Alfréd_a_jegyző
             Jegyek(menu);
         }
 
-        static void Option3()
+        static void ReportMissingStudents(Menu menu)
         {
-            Console.WriteLine("");
+            Console.Clear();
+            Console.WriteLine("Hiányzó diákok jelentése");
+            Console.WriteLine(new string('-', 80));
+
+            foreach (var student in students)
+            {
+                Console.Write($"{student.Key,-10}");
+                Console.Write($"{student.Value.Item1,-30}");
+                Console.Write(student.Value.Item3 ? "[X]" : "[ ]"); // Show check mark for missing students
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("\nNyomj Entert a kijelölt diák hiányzásának jelentésére.");
+            Console.WriteLine("Nyomj Esc-et a visszalépéshez.");
+
+            // Handling user input
+            var key = Console.ReadKey().Key;
+            switch (key)
+            {
+                case ConsoleKey.Enter:
+                    Console.Write("\nDiák azonosítója: ");
+                    if (int.TryParse(Console.ReadLine(), out int id))
+                    {
+                        if (students.ContainsKey(id))
+                        {
+                            students[id] = new Tuple<string, List<int>, bool>(students[id].Item1, students[id].Item2, true); // Mark student as missing
+                            Console.WriteLine("Hiányzás sikeresen jelentve.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Nincs ilyen azonosítójú diák.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Érvénytelen azonosító formátum.");
+                    }
+                    Console.ReadKey();
+                    ReportMissingStudents(menu); // Restart the function after reporting
+                    break;
+                case ConsoleKey.Escape:
+                    Console.Clear();
+                    menu.Display(); // Return to main menu
+                    break;
+                default:
+                    Console.Clear();
+                    ReportMissingStudents(menu);
+                    break;
+            }
         }
 
-        static void Main(string[] args)
-        {
-            var menu = new Menu(new List<MenuOption>
-            {
-                new MenuOption { Description = "Órarend", Function = menu => { Orarend(menu); } },
-                new MenuOption { Description = "Jegyek kezelése", Function = menu => { Jegyek(menu); } },
-                //new MenuOption { Description = "Option 3", Function = Option3 }
-            });
 
-            menu.Display();
+        public static class HungarianNameGenerator
+        {
+            private static List<string> firstNames = new List<string> { "Béla", "József", "István", "Zoltán", "Péter", "Gábor", "Attila", "László", "Mihály", "György" };
+            private static List<string> lastNames = new List<string> { "Kovács", "Szabó", "Horváth", "Tóth", "Varga", "Nagy", "Farkas", "Papp", "Lakatos", "Molnár" };
+
+            public static string Generate()
+            {
+                Random rand = new Random();
+                string firstName = firstNames[rand.Next(firstNames.Count)];
+                string lastName = lastNames[rand.Next(lastNames.Count)];
+
+                return $"{firstName} {lastName}";
+            }
         }
     }
 }
