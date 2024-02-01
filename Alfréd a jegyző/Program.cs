@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Alfréd_a_jegyző_2
+namespace Alfréd_a_jegyző
 {
     class Program
     {
