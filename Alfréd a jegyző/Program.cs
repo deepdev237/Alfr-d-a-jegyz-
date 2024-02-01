@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Alfréd_a_jegyző
+namespace Alfréd_a_jegyző_2
 {
     class Program
     {
@@ -22,7 +22,7 @@ namespace Alfréd_a_jegyző
         class MenuOption
         {
             public string Description { get; set; }
-            public Action Function { get; set; }
+            public Action<Menu> Function { get; set; }
         }
 
         class Menu
@@ -43,33 +43,26 @@ namespace Alfréd_a_jegyző
                     {
                         Console.WriteLine($"{i + 1}. {options[i].Description}");
                     }
+
                     Console.WriteLine("q. Kilépés");
                     Console.Write("Válassz egy opciót:");
                     var input = Console.ReadLine();
 
                     if (input.ToLower() == "q")
                     {
-                        this.Quit();
+                        Quit();
+                        break;
                     }
 
                     if (int.TryParse(input, out int option) && option >= 1 && option <= options.Count)
                     {
-                        options[option - 1].Function();
+                        Console.Clear();
+                        options[option - 1].Function(this);
+                        //Console.Clear();
                     }
                     else
                     {
                         Console.WriteLine("Alfréd nem érti a parancsot.");
-                    }
-
-                    if (!quit)
-                    {
-                        Console.WriteLine("Nyomj egy gombot a folytatáshoz.");
-                        var key = Console.ReadKey();
-                        if (key.KeyChar == 'q' || key.KeyChar == 'Q')
-                        {
-                            this.Quit();
-                        }
-                        Console.Clear();
                     }
                 }
             }
@@ -80,8 +73,15 @@ namespace Alfréd_a_jegyző
             }
         }
 
-        static void Orarend()
+        static void Quit()
         {
+            Console.WriteLine("Alfréd búcsúzik.");
+            Environment.Exit(0);
+        }
+
+        static void Orarend(Menu menu)
+        {
+            Console.Clear();
             var timetable = new Dictionary<string, List<string>>
             {
                 { "Hetfo", new List<string> { "", "Matek", "Matek", "Irodalom", "Töri", "Osztályfőnöki", "Fizika", "Angol", "" } },
@@ -91,7 +91,7 @@ namespace Alfréd_a_jegyző
                 { "Pentek", new List<string> { "", "", "Matek", "Nyelvtan", "Fizika", "Töri", "Angol", "Tesi", "Tesi" } }
             };
 
-            Console.WriteLine($"{ "Nap",-10} { "Hétfő",-15} { "Kedd",-15} { "Szerda",-15} { "Csütörtök",-15} { "Pentek",-15}");
+            Console.WriteLine($"{"Nap",-10} {"Hétfő",-15} {"Kedd",-15} {"Szerda",-15} {"Csütörtök",-15} {"Pentek",-15}");
             Console.WriteLine(new string('-', 80));
 
             for (int i = 0; i < 9; i++)
@@ -106,11 +106,14 @@ namespace Alfréd_a_jegyző
                     }
                     else
                     {
-                        Console.Write($"{ " ",-15}");
+                        Console.Write($"{" ",-15}");
                     }
                 }
                 Console.WriteLine();
             }
+
+            Console.ReadKey();
+            Console.Clear();
         }
 
         static Dictionary<int, Tuple<string, List<int>>> students = new Dictionary<int, Tuple<string, List<int>>>
@@ -122,9 +125,10 @@ namespace Alfréd_a_jegyző
             { 5, new Tuple<string, List<int>>(HungarianNameGenerator.Generate(), new List<int> { 4, 5, 1, 2, 3 }) }
         };
 
-        static void Jegyek()
+        static void Jegyek(Menu menu)
         {
-            Console.WriteLine($"{ "Azonosító",-10} { "Név",-20}");
+            Console.Clear();
+            Console.WriteLine($"{"Azonosító",-10} {"Név",-20}");
             Console.WriteLine(new string('-', 80));
 
             foreach (var student in students)
@@ -137,29 +141,24 @@ namespace Alfréd_a_jegyző
                 }
                 Console.WriteLine();
             }
-        }
 
-        static void Jegyhozzadas()
-        {
+            //Jegy hozzáadás
             Console.WriteLine("1. Jegyek kezelése");
-            Console.WriteLine("2. Visszalépés");
-            Console.Write("Válassz egy opciót: ");
-            var option = Console.ReadLine();
+            Console.Write("Válassz egy opciót vagy lépj ki bármilyen más billentyűvel: ");
+            string option = Console.ReadLine();
 
             switch (option)
             {
                 case "1":
-                    AddGrade();
+                    AddGrade(menu);
                     break;
-                case "2":
-                    return;
                 default:
-                    Console.WriteLine("Alfréd nem érti a parancsot.");
-                    break;
+                    Console.Clear();
+                    return;
             }
         }
 
-        static void AddGrade()
+        static void AddGrade(Menu menu)
         {
             Console.Write("Diák azonosító:");
             var id = int.Parse(Console.ReadLine());
@@ -176,28 +175,21 @@ namespace Alfréd_a_jegyző
                 Console.WriteLine("Alfréd nem talál ilyen diákot.");
             }
             Console.Clear();
-            Jegyek();
-            Jegyhozzadas();
+            Jegyek(menu);
         }
 
         static void Option3()
         {
-            Console.WriteLine("You selected option 3.");
-        }
-
-        static void Quit()
-        {
-            Console.WriteLine("Alfréd búcsúzik.");
-            Environment.Exit(0);
+            Console.WriteLine("");
         }
 
         static void Main(string[] args)
         {
             var menu = new Menu(new List<MenuOption>
             {
-                new MenuOption { Description = "Órarend", Function = Orarend },
-                new MenuOption { Description = "Jegyek kezelése", Function = () => { Jegyek(); Jegyhozzadas(); } },
-                new MenuOption { Description = "Option 3", Function = Option3 }
+                new MenuOption { Description = "Órarend", Function = menu => { Orarend(menu); } },
+                new MenuOption { Description = "Jegyek kezelése", Function = menu => { Jegyek(menu); } },
+                //new MenuOption { Description = "Option 3", Function = Option3 }
             });
 
             menu.Display();
